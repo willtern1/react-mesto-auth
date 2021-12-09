@@ -1,0 +1,10 @@
+.header__title {
+margin: 0;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(
+    1deg,#fff,#9b9191,#fff);
+  -webkit-background-clip: text;
+  cursor: pointer;
+  padding-left: 19px;
+  padding-top: 11px;
+}

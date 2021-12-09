@@ -1,0 +1,22 @@
+.profile__info {
+  grid-area: info;
+  gap: 0 18px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas:
+      "name button"
+      "job job";
+  grid-row: 1/1;
+  grid-column: 2/3;
+  margin-left: 2%;
+  width: 67%;
+}
+
+@media screen and (max-width: 540px) {
+  .profile__info {
+    margin-top: 27px;
+    margin-left: 0px;
+    grid-template-columns: 90% 10%;
+  }
+}

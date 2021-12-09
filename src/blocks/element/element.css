@@ -1,0 +1,16 @@
+.element {
+  width: 282px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: white;
+  overflow: hidden;
+  border: 5px double rgb(82 77 82 / 50%);
+  box-shadow: 0 0 10px 4px #ffcc00;
+}
+
+@media screen and (max-width: 540px) {
+  .element {
+    width: 88.1%;
+  }
+}

@@ -1,0 +1,32 @@
+.body__music-icon_on {
+  background-image: url(../../../../images/musicOn.svg);
+  background-size: contain;
+  transition:  1s;
+  animation: flicker 1.5s infinite;
+  width: 15px;
+  height: 15px;
+  margin-left: 40px;
+  background-color: #00c11985;
+  border-radius: 6px;
+}
+
+@keyframes flicker {
+
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+    box-shadow:
+      0 0 4px #00c119,
+      0 0 11px #00c119,
+      0 0 19px #00c119,
+      0 0 40px #00c119,
+      0 0 80px #00c119,
+      0 0 90px #00c119,
+      0 0 100px #00c119,
+      0 0 150px #00c119;
+
+  }
+
+  20%, 24%, 55% {
+    box-shadow: none;
+  }
+}

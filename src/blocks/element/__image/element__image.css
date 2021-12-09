@@ -1,0 +1,14 @@
+.element__image {
+  height: 282px;
+  object-fit: cover;
+  border-style: none;
+  transition: 1s ease-out;
+  display: block;
+  background-color: black;
+  cursor: pointer;
+}
+
+.element__image:hover {
+  transition: 1s ease-out;
+  transform: scale(1.1);
+}

@@ -1,0 +1,14 @@
+.header__list-link {
+  text-decoration: none;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(
+    1deg, #fff, #9b9191, #fff);
+  -webkit-background-clip: text;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 340px) {
+  .header__list-link {
+    font-size: 15px;
+  }
+}

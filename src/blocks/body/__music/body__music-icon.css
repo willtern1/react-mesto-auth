@@ -1,0 +1,37 @@
+.body__music-icon {
+  background-image: url(../../../images/musicOff.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-size: contain;
+  border: 0px;
+  transition:  1s;
+  cursor: pointer;
+  position: fixed;
+  z-index: 10;
+  width: 15px;
+  height: 15px;
+  animation: flickerRed 1.5s infinite;
+  border-radius: 6px;
+}
+
+@keyframes flickerRed {
+
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+    box-shadow:
+      0 0 4px #d12020,
+      0 0 11px #d12020,
+      0 0 19px #d12020,
+      0 0 40px #d12020,
+      0 0 80px #d12020,
+      0 0 90px #d12020,
+      0 0 100px #d12020,
+      0 0 150px #d12020;
+
+  }
+
+  20%, 24%, 55% {
+    box-shadow: none;
+  }
+}

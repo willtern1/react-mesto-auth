@@ -1,0 +1,21 @@
+.element__text {
+  grid-area: name;
+  align-self: center;
+  margin: 0;
+  color: rgba(0, 0, 0, 1);
+  /*font-family: Deusex Regular, Arial, Helvetica, sans-serif, 'Times New Roman', Times, serif;*/
+  font-family: Deus, sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 24px;
+  margin-left: 7.5%;
+  overflow-wrap: anywhere;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background: linear-gradient(
+    1deg,#ffffff,#9b9191,#fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

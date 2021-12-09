@@ -1,0 +1,16 @@
+.login-container__input {
+  width: 100%;
+  margin-top: 48px;
+  border: none;
+  border-bottom: 1px solid rgb(255 255 255);
+  box-shadow: 0 5px 2px -2px #ffa900;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(
+    1deg,#fff,#00c119,#fff);
+  -webkit-background-clip: text;
+  font-size: 14px;
+}
+
+.login-container__input:last-of-type {
+  margin-top: 36px;
+}

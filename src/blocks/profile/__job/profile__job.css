@@ -1,0 +1,25 @@
+.profile__job {
+  grid-area: job;
+  margin: 0;
+  font-family: Deus, sans-serif;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 21.78px;
+  margin-top: 10px;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(
+    1deg,#fff,#9b9191,#fff);
+  -webkit-background-clip: text;
+}
+
+@media screen and (max-width: 540px) {
+  .profile__job {
+    font-size: 14px;
+    line-height: 16.94px;
+    margin-top: 8px;
+  }
+}

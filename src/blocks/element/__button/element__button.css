@@ -1,0 +1,22 @@
+.element__button{
+  grid-area: button;
+  background-image: url(../../../images/batteryOff.svg);
+  width: 25px;
+  height: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-size: contain;
+  border: 0px;
+  margin-right: 7.1%;
+  margin-top: 10px;
+  padding-right: 16px;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.element__button:hover{
+  background-color: #00c11985;
+  box-shadow: 0 0 21px 5px #00c119;
+  transition: .5s;
+}

@@ -1,0 +1,33 @@
+.profile__avatar-container {
+  /*background-color: transparent;  /*background-color: transparent;*/
+  background-image: url(../../../images/edit-avatar.svg);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 120px;
+  outline: none;
+  padding: 0;
+  width: 120px;
+  background-repeat: no-repeat;
+  background-position: center;
+  grid-area: image;
+  grid-row: 1/1;
+  grid-column: 1/2;
+  z-index: 1;
+  margin: 0;
+  opacity: 0;
+  transition: all 1s ease-out;
+  position: absolute;
+  margin-left: 4px;
+}
+.profile__avatar-container:hover {
+  opacity: 0.7;
+  transition: all 1s ease-out;
+  background-color:black;
+}
+
+@media screen and (max-width: 540px) {
+  .profile__avatar-container {
+    margin-top: 5px;
+  }
+}

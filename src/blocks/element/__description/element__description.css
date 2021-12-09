@@ -1,0 +1,15 @@
+.element__description {
+  display: grid;
+  grid-template-columns: 1fr 38px;
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas:
+        "name button"
+        "name counter";
+  padding-bottom: 26px;
+  padding-top: 26px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0% 8%;
+  z-index: 1;
+  background: linear-gradient(0deg,#8d5f05,#000000,#000000);
+}
