@@ -1,5 +1,5 @@
 import '../index.css'
-import {Routes, Route, Link} from "react-router-dom";
+import {Routes, Route,} from "react-router-dom";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -12,6 +12,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import Login from "./Login";
 import Register from "./Register";
+import ProtectedRoute from "./ProtectRoute";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -19,7 +20,8 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''});
   const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([])
+  const [cards, setCards] = React.useState([]);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   //лайк
   function handleCardLike(card) {
@@ -131,7 +133,6 @@ function App() {
       }
     })
   }, [])
-
 //jsx
   return (
     <div className='App' style={{width: '100%'}}>
@@ -148,24 +149,26 @@ function App() {
           >
           </ImagePopup>
           <Header
-            linkText={"Регистрация"}
+            loggedIn={loggedIn}
           />
           <Routes>
-            <Route path="/" element={
-              <Main
-                editProfilePopup={openProfilePopup}
-                addCardPopup={openCardAddPopup} // Пропсы для открытия попчанских в мейне
-                refreshAvatar={openAvatarPopup}
-                onCardClick={handleCardClick}
-                cards={cards}
-                currentUser={currentUser}
-                onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
-              />} />
+            <Route path={'/'} element={<ProtectedRoute
+              loggedIn={loggedIn}
+              editProfilePopup={openProfilePopup}
+              addCardPopup={openCardAddPopup} // Пропсы для открытия попчанских в мейне
+              refreshAvatar={openAvatarPopup}
+              onCardClick={handleCardClick}
+              cards={cards}
+              currentUser={currentUser}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
+              component={<Main/>}
+            />}/>
+            <Route path={'*'} element={<ProtectedRoute />}/>
             <Route path="/sign-up" element={<Register/>}/>
             <Route path="/sign-in" element={<Login/>}/>
           </Routes>
-          <Footer/>
+          {loggedIn ? <Footer/> : ''}
         </CurrentUserContext.Provider>
       </div>
     </div>

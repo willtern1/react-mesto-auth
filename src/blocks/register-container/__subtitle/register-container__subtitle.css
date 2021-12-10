@@ -1,0 +1,10 @@
+.register-container__subtitle {
+  margin: 0;
+  font-size: 14px;
+  align-self: center;
+  margin-top: 17px;
+  color: transparent;
+  background: linear-gradient(
+    1deg, #fff, #9b9191, #fff);
+  -webkit-background-clip: text;
+}

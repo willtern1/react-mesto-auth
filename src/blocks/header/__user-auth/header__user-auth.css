@@ -1,0 +1,12 @@
+.header__user-auth {
+  margin: 0;
+  color: #ffa900;
+  align-self: end;
+  width: 100%;
+  display: flex;
+  justify-self: center;
+  padding-right: 1%;
+  justify-content: flex-end;
+  font-size: 13px;
+  animation: blink 2s linear infinite;
+}

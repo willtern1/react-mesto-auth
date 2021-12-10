@@ -1,0 +1,21 @@
+.register-container__link {
+  text-decoration: none;
+  margin: 0;
+  margin-left: 5px;
+  color: #ffa900;
+  text-shadow: 0 0 3vw #865900;
+  cursor: pointer;
+  -webkit-animation: blink 2s linear infinite;
+  animation: blink 2s linear infinite;
+}
+
+@-webkit-keyframes blink {
+  50% {   color: #8c6200; }
+  51% {   color: #be6b02; }
+  100% {  color: #ffa600; }
+}
+@keyframes blink {
+  50% {   color: #8c6200; }
+  51% {   color: #be6b02; }
+  100% {  color: #ffa600; }
+}

@@ -1,0 +1,17 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  max-width: 358px;
+  width: 99%;
+  min-width: 106px;
+}
+
+@media screen and (max-width: 360px) {
+  .login-container {
+    width: 88%;
+  }
+}
