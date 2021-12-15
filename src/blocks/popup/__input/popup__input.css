@@ -21,12 +21,12 @@
     width: 238px;
   }
   .popup__input:last-of-type{
-    margin-bottom: 45px;
+    margin-bottom: 15px;
   }
 }
 
 .popup__input:last-of-type {
-  margin-bottom: 48px;
+  margin-bottom: 18px;
 }
 .popup__input:focus {
   outline: none;
