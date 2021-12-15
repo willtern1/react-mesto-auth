@@ -32,20 +32,22 @@ function Register(props) {
   function handleSubmitRegister(e) {
     e.preventDefault()
     register(inputValues.email, inputValues.password).then((res) => {
-      if (res.ok) {
+      if (res.data) {
+        props.setInfoToolTipClass(false)
         props.setRegisterPopupSubtitle('Вы успешно зарегистрировались!')
         props.setInfoToolTipTitle('ACCESS GRANTED')
         props.openRegisterPopup()
         setTimeout(props.onClose, 2000)
         setTimeout(zzTop, 2200)
-      } else if (res) {
+      } else {
         props.setInfoToolTipClass(true)
         props.setRegisterPopupSubtitle('Что-то пошло не так! Попробуйте ещё раз.')
         props.setInfoToolTipTitle('ACCESS DENIED')
         props.openRegisterPopup()
       }
-    }).catch((err) => {
-      alert(err)
+
+    }).catch(() => {
+
     })
   }
 
