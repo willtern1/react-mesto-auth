@@ -165,7 +165,7 @@ function App() {
     })
   }
 
-  function zzTop() {
+  function handleNavigateToSingIn() {
     navigate('/sing-in')
   }
 
@@ -175,7 +175,7 @@ function App() {
         setRegisterPopupSubtitle('Вы успешно зарегистрировались!')
         setInfoToolTipTitle('ACCESS GRANTED')
         setTimeout(closeAllPopups, 2000)
-        setTimeout(zzTop, 2200)
+        setTimeout(handleNavigateToSingIn, 2200)
     }).catch(() => {
       setInfoToolTipClass(true)
       setRegisterPopupSubtitle('Что-то пошло не так! Попробуйте ещё раз.')
