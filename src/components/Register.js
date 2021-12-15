@@ -11,7 +11,7 @@ function Register(props) {
       password: ''
     })
     resetForm()
-  }, [])
+  }, [setValues, resetForm])
   function handleSubmitRegister(e) {
     e.preventDefault()
     props.handleSubmitRegister(values.email, values.password)

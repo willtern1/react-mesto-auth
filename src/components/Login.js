@@ -12,7 +12,7 @@ function Login(props) {
       password: ''
     })
     resetForm()
-  }, [])
+  }, [setValues, resetForm])
 
   function handleSubmitAuthorization(e) {
     e.preventDefault()
