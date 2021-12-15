@@ -198,7 +198,6 @@ function App() {
         if (res) {
           setLoggedIn(true)
           setHeaderEmail(res.data.email)
-
         }
       }).catch(err => alert(err))
     }
