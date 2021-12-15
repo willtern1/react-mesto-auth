@@ -1,0 +1,16 @@
+.popup_type_info-tooltip-close-icon {
+  background-image: url(../../../images/closeicon.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #ffa80085;
+  border: none;
+  width: 32px;
+  height: 32px;
+  transition: opacity .3s linear;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  right: -24px;
+  top: -29px;
+  box-shadow: 0 0 29px 4px #ffa900;
+}

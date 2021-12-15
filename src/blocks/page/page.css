@@ -1,7 +1,6 @@
 .page {
   align-items: center;
-  background: linear-gradient(
-    0deg,#000,#976e1f,#000);
+  background: transparent;
   color: #fff;
   display: flex;
   flex-direction: column;

@@ -1,0 +1,10 @@
+.popup_type_info-tooltip-subtitle {
+  margin: 0;
+  margin-top: 38px;
+  align-self: center;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(
+    1deg,#fff,#9b9191,#fff);
+  -webkit-background-clip: text;
+  font-size: 13px;
+}

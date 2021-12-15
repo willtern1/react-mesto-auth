@@ -1,0 +1,36 @@
+.popup_type_info-tooltip-title {
+  color: #00ff21;
+  margin: 0;
+  font-size: 19px;
+  -webkit-animation: blinktitle 2s linear infinite;
+  animation: blinktitle 2s linear infinite;
+}
+
+@-webkit-keyframes blinktitle {
+  50% {
+    color: #00700f;
+  }
+  51% {
+    color: #00710f;
+
+  }
+  100% {
+    color: #00c119;
+
+  }
+}
+
+@keyframes blinktitle {
+  50% {
+    color: #00700f;
+
+  }
+  51% {
+    color: #00710f;
+
+  }
+  100% {
+    color: #00c119;
+
+  }
+}

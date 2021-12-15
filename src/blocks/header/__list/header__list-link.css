@@ -5,10 +5,15 @@
     1deg, #fff, #9b9191, #fff);
   -webkit-background-clip: text;
   font-size: 18px;
+  transition: opacity 0.5s ease-in-out;
 }
 
 @media screen and (max-width: 340px) {
   .header__list-link {
     font-size: 15px;
   }
+}
+
+.header__list-link:hover {
+  opacity: 0.6;
 }

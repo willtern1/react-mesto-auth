@@ -66,3 +66,14 @@
 @import url(./blocks/register-container/__button/register-container__button.css);
 @import url(./blocks/register-container/__subtitle/register-container__subtitle.css);
 @import url(./blocks/register-container/__link/register-container__link.css);
+@import url(./blocks/popup/_type/_info-tooltip/popup_type_info-tooltip.css);
+@import url(./blocks/popup/__container/_type/_info-tooltip/popup__container_type_info-tooltip.css);
+@import url(./blocks/popup/__close-icon/popup_type_info-tooltip-close-icon.css);
+@import url(./blocks/popup/__form/_type_info-tooltip/popup__form_type_info-tooltip.css);
+@import url(./blocks/popup/info-tooltip-title-container/popup_type_info-tooltip-title-container.css);
+@import url(./blocks/popup/info-tooltip-title-container/info-tooltip-title/popup_type_info-tooltip-title.css);
+@import url(./blocks/popup/info-tooltip-title-container/info-tooltip-title/_denied/popup_type_info-tooltip-title_denied.css);
+@import url(./blocks/popup/info-tooltip-title-container/info-tooltip-subtitle/popup_type_info-tooltip-subtitle.css);
+@import url(./blocks/popup/info-tooltip-title-container/info-tooltip-image/popup_type_info-tooltip-image.css);
+@import url(./blocks/popup/__error/_visible/_register-error/popup__error_visible_register-error.css);
+@import url(./blocks/register-container/__button/_invalid/register-container__button_invalid.css);

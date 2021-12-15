@@ -1,0 +1,12 @@
+.popup_type_info-tooltip-title-container {
+  display: flex;
+  width: 92%;
+  height: 28px;
+  background-color: #ffa900b3;
+  border: #ffa900 2px solid;
+  margin-top: 19px;
+  margin-left: 12px;
+  font-size: 14px;
+  align-items: center;
+  border-bottom-left-radius: 12px;
+}

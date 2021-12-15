@@ -1,0 +1,10 @@
+.popup_type_info-tooltip-image {
+  background-image: url("../../../../images/galka.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 121px;
+  align-self: center;
+  width: 173px;
+  margin-top: 60px;
+}

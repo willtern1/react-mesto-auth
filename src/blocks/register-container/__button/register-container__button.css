@@ -8,4 +8,36 @@
   background-color: #00c119;
   border: 2px solid #FFFFFF;
   box-shadow: 0 0 30px 11px #00c119;
+  -webkit-animation: blinkbtn 2s linear infinite;
+  animation: blinkbtn 2s linear infinite;
+}
+
+@-webkit-keyframes blinkbtn {
+  50% {
+    background-color: #00700f;
+    box-shadow: 0 0 30px 11px #00700f;
+  }
+  51% {
+    background-color: #017c11;
+    box-shadow: 0 0 30px 11px #017c11;
+  }
+  100% {
+    background-color: #00c119;
+    box-shadow: 0 0 30px 11px #00c119;
+  }
+}
+
+@keyframes blinkbtn {
+  50% {
+    background-color: #00700f;
+    box-shadow: 0 0 30px 11px #00700f;
+  }
+  51% {
+    background-color: #017c11;
+    box-shadow: 0 0 30px 11px #017c11;
+  }
+  100% {
+    background-color: #00c119;
+    box-shadow: 0 0 30px 11px #00c119;
+  }
 }

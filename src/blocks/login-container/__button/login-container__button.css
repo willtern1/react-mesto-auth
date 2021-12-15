@@ -8,4 +8,6 @@
   background-color: #00c119;
   border: 2px solid #FFFFFF;
   box-shadow: 0 0 30px 11px #00c119;
+  -webkit-animation: blinkbtn 2s linear infinite;
+  animation: blinkbtn 2s linear infinite;
 }

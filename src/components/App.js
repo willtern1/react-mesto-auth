@@ -1,5 +1,5 @@
 import '../index.css'
-import {Routes, Route,} from "react-router-dom";
+import {Routes, Route, useNavigate, useLocation, Link} from "react-router-dom";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -13,15 +13,29 @@ import AddPlacePopup from "./AddPlacePopup";
 import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectRoute";
+import {authorize, checkToken} from "../utils/auf";
+import InfoTooltip from "./InfoTooltip";
+import Music from "./Music";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);       //Хуки
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isRegisterPopup, setRegisterPopup] = React.useState(false)
+  const [registerPopupSubtitle, setRegisterPopupSubtitle] = React.useState('')
+  const [infoToolTipTitle, setInfoToolTipTitle] = React.useState('')
+  const [infoToolTipClass, setInfoToolTipClass] = React.useState(false)
   const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [headerEmail, setHeaderEmail] = React.useState('')
+  const navigate = useNavigate();
+  const {pathname} = useLocation();
+  const registerPath = '/sign-in' === pathname;
+  const authorizationPath = '/sign-up' === pathname;
+  const mainPath = '/' === pathname;
+
 
   //лайк
   function handleCardLike(card) {
@@ -77,11 +91,16 @@ function App() {
     setSelectedCard(card)
   }
 
+  function openRegisterPopup() {
+    setRegisterPopup(true)
+  }
+
 //функция закрытия попчанских
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
+    setRegisterPopup(false)
     setSelectedCard({name: '', link: ''})
   }
 
@@ -133,16 +152,73 @@ function App() {
       }
     })
   }, [])
+
+
+  function handleSubmitAuthorize(email, password) {
+    authorize(email, password).then((res) => {
+      if (res.token) {
+        setLoggedIn(true)
+        setHeaderEmail(email)
+        localStorage.setItem('jwt', res.token)
+      } else {
+        setInfoToolTipClass(true)
+        setInfoToolTipTitle('ACCESS DENIED')
+        setRegisterPopupSubtitle('Неверный Email или Пароль')
+        openRegisterPopup()
+      }
+
+    }).catch((err) => {
+      alert(err)
+    })
+  }
+
+  React.useEffect(() => {
+    if (loggedIn === true) {
+      navigate('/')
+    }
+  }, [loggedIn, navigate])
+
+  React.useEffect(() => {
+    const jwt = localStorage.getItem('jwt')
+    if (jwt) {
+      checkToken(jwt).then((res) => {
+        if (res) {
+          setLoggedIn(true)
+          setHeaderEmail(res.data.email)
+
+        }
+      }).catch(err => alert(err))
+    }
+  }, [])
+
+  function singOut(e) {
+    e.preventDefault()
+    setLoggedIn(false)
+    localStorage.removeItem("jwt")
+  }
+
+  function textChange() {
+    if (registerPath) {
+      return <Link className={"header__list-link"} to="/sign-up">Регистрация</Link>
+    } else if (authorizationPath) {
+      return <Link className={"header__list-link"} to="/sign-in">Войти</Link>
+    } else if (mainPath) {
+      return <Link className={"header__list-link"} onClick={singOut} to="/sign-in">Выйти</Link>
+    }
+  }
+
 //jsx
   return (
     <div className='App' style={{width: '100%'}}>
-      <button className="body__music-icon " type="button"/>
+      <Music/>
       <div className="page">
-        <audio className="audio" src="../sound/The_Mole_320kbps.mp3" type="audio/mpeg" loop/>
         <CurrentUserContext.Provider value={currentUser}>
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
           <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdateCard={handleUpdateCard}/>
+          <InfoTooltip isOpen={isRegisterPopup} onClose={closeAllPopups}
+                       registerPopupSubtitle={registerPopupSubtitle} infoToolTipTitle={infoToolTipTitle}
+                       infoToolTipClass={infoToolTipClass}/>
           <ImagePopup
             card={selectedCard}
             onClose={closeAllPopups}
@@ -150,6 +226,8 @@ function App() {
           </ImagePopup>
           <Header
             loggedIn={loggedIn}
+            headerEmail={headerEmail}
+            textChange={textChange}
           />
           <Routes>
             <Route path={'/'} element={<ProtectedRoute
@@ -162,11 +240,13 @@ function App() {
               currentUser={currentUser}
               onCardLike={handleCardLike}
               onCardDelete={handleCardDelete}
-              component={<Main/>}
+              component={Main}
             />}/>
-            <Route path={'*'} element={<ProtectedRoute />}/>
-            <Route path="/sign-up" element={<Register/>}/>
-            <Route path="/sign-in" element={<Login/>}/>
+            <Route path={'*'} element={<ProtectedRoute/>}/>
+            <Route path="/sign-up" element={<Register setInfoToolTipClass={setInfoToolTipClass} openRegisterPopup={openRegisterPopup} onClose={closeAllPopups}
+                                                      setRegisterPopupSubtitle={setRegisterPopupSubtitle}
+                                                      setInfoToolTipTitle={setInfoToolTipTitle}/>}/>
+            <Route path="/sign-in" element={<Login handleSubmitAuthorize={handleSubmitAuthorize}/>}/>
           </Routes>
           {loggedIn ? <Footer/> : ''}
         </CurrentUserContext.Provider>

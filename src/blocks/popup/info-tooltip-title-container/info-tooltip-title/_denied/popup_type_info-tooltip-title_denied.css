@@ -1,0 +1,34 @@
+.popup_type_info-tooltip-title_denied {
+  color: #ff0202;
+  -webkit-animation: blinkDenied 2s linear infinite;
+  animation: blinkDenied 2s linear infinite;
+}
+
+@-webkit-keyframes blinkDenied {
+  50% {
+    color: #650000;
+  }
+  51% {
+    color: #a80101;
+
+  }
+  100% {
+    color: #ff0202;
+
+  }
+}
+
+@keyframes blinkDenied {
+  50% {
+    color: #650000;
+
+  }
+  51% {
+    color: #a80101;
+
+  }
+  100% {
+    color: #ff0202;
+
+  }
+}
