@@ -13,9 +13,10 @@ import AddPlacePopup from "./AddPlacePopup";
 import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectRoute";
-import {authorize, checkToken} from "../utils/auf";
+import * as auth from "../utils/auth"
 import InfoTooltip from "./InfoTooltip";
 import Music from "./Music";
+
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -111,7 +112,6 @@ function App() {
       closeAllPopups()
     }).catch((err) => {
       alert(`Ошибка загрузки данных :  ${err.status}`)
-      openProfilePopup()
     })
   }
 
@@ -122,7 +122,6 @@ function App() {
       closeAllPopups()
     }).catch((err) => {
       alert(`Ошибка обновления аватара : ${err.status}`)
-      openAvatarPopup()
     })
   }
 
@@ -133,13 +132,12 @@ function App() {
       closeAllPopups()
     }).catch((err) => {
       alert(`Ошибка добавления карточки  ${err.status}`)
-      openCardAddPopup()
     })
   }
 
   React.useEffect(() => {
     document.addEventListener('keydown', (evt) => {
-      if (evt.keyCode === 27) {
+      if (evt.key === 'Escape') {
         closeAllPopups()
       }
     })
@@ -155,20 +153,35 @@ function App() {
 
 
   function handleSubmitAuthorize(email, password) {
-    authorize(email, password).then((res) => {
-      if (res.token) {
+    auth.authorize(email, password).then((res) => {
         setLoggedIn(true)
         setHeaderEmail(email)
         localStorage.setItem('jwt', res.token)
-      } else {
-        setInfoToolTipClass(true)
-        setInfoToolTipTitle('ACCESS DENIED')
-        setRegisterPopupSubtitle('Неверный Email или Пароль')
-        openRegisterPopup()
-      }
+    }).catch(() => {
+      setInfoToolTipClass(true)
+      setInfoToolTipTitle('ACCESS DENIED')
+      setRegisterPopupSubtitle('Неверный Email или Пароль')
+      openRegisterPopup()
+    })
+  }
 
-    }).catch((err) => {
-      alert(err)
+  function zzTop() {
+    navigate('/sing-in')
+  }
+
+  function handleSubmitRegister(email, password) {
+    auth.register(email, password).then(() => {
+        setInfoToolTipClass(false)
+        setRegisterPopupSubtitle('Вы успешно зарегистрировались!')
+        setInfoToolTipTitle('ACCESS GRANTED')
+        setTimeout(closeAllPopups, 2000)
+        setTimeout(zzTop, 2200)
+    }).catch(() => {
+      setInfoToolTipClass(true)
+      setRegisterPopupSubtitle('Что-то пошло не так! Попробуйте ещё раз.')
+      setInfoToolTipTitle('ACCESS DENIED')
+    }).finally(() => {
+      openRegisterPopup()
     })
   }
 
@@ -181,7 +194,7 @@ function App() {
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt')
     if (jwt) {
-      checkToken(jwt).then((res) => {
+      auth.checkToken(jwt).then((res) => {
         if (res) {
           setLoggedIn(true)
           setHeaderEmail(res.data.email)
@@ -243,9 +256,7 @@ function App() {
               component={Main}
             />}/>
             <Route path={'*'} element={<ProtectedRoute/>}/>
-            <Route path="/sign-up" element={<Register setInfoToolTipClass={setInfoToolTipClass} openRegisterPopup={openRegisterPopup} onClose={closeAllPopups}
-                                                      setRegisterPopupSubtitle={setRegisterPopupSubtitle}
-                                                      setInfoToolTipTitle={setInfoToolTipTitle}/>}/>
+            <Route path="/sign-up" element={<Register handleSubmitRegister={handleSubmitRegister}/>}/>
             <Route path="/sign-in" element={<Login handleSubmitAuthorize={handleSubmitAuthorize}/>}/>
           </Routes>
           {loggedIn ? <Footer/> : ''}

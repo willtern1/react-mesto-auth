@@ -1,40 +1,22 @@
 import React from "react";
 import '../index.css'
+import useFormAndValidation from "../hooks/useFormAndValidation";
 
 
 function Login(props) {
-  const [inputValues, setInputValues] = React.useState({email: '', password: ''});
-  const [inputValid, setInputValid] = React.useState({email: true, password: true});
-  const [errorMessage, setErrorMessage] = React.useState({email: '', password: ''});
-
-  function handleChangeInputs(e) {
-    setInputValues({
-      ...inputValues,
-      [e.target.name]: e.target.value
-    });
-    setInputValid({
-      ...inputValid,
-      [e.target.name]: e.target.validity.valid
-    });
-    setErrorMessage({
-      ...errorMessage,
-      [e.target.name]: e.target.validationMessage
-    });
-  }
+  const {values, handleChange, errors, isValid, setValues, resetForm} = useFormAndValidation();
 
   React.useEffect(() => {
-    setInputValues({
+    setValues({
       email: '',
       password: ''
     })
-    setInputValid({email: false, password: false});
-    setErrorMessage({email: '', password: ''});
+    resetForm()
   }, [])
 
   function handleSubmitAuthorization(e) {
     e.preventDefault()
-
-    props.handleSubmitAuthorize(inputValues.email, inputValues.password)
+    props.handleSubmitAuthorize(values.email, values.password)
   }
 
   return (
@@ -42,26 +24,26 @@ function Login(props) {
       <form className={'login-container__form'} onSubmit={handleSubmitAuthorization}>
         <h2 className={'login-container__title'}>Вход</h2>
         <label htmlFor="login-email"/><input
-        className={`login-container__input ${inputValid.email ? '' : `popup__input_type_error`}`} placeholder={"Email"}
+        className={`login-container__input ${isValid.email ? '' : `popup__input_type_error`}`} placeholder={"Email"}
         type={"email"}
-        value={inputValues.email || ''} id={'login-email'} name={'email'}
-        onChange={handleChangeInputs} minLength="6" maxLength="30" required/>
-        <span id={'login-email-error'} className={`popup__error${inputValid.email ? '' : `_visible_register-error`}`}>
-          {inputValid.email ? '' : errorMessage.email}
+        value={values.email || ''} id={'login-email'} name={'email'}
+        onChange={handleChange} minLength="6" maxLength="30" required/>
+        <span id={'login-email-error'} className={`popup__error${isValid.email ? '' : `_visible_register-error`}`}>
+          {isValid.email ? '' : errors.email}
         </span>
         <label htmlFor="login-password"/><input
-        className={`${inputValid.password ? '' : `popup__input_type_error`} login-container__input`}
+        className={`${isValid.password ? '' : `popup__input_type_error`} login-container__input`}
         placeholder={"Пароль"}
-        type={"password"} value={inputValues.password || ''}
+        type={"password"} value={values.password || ''}
         id={'login-password'}
-        name={'password'} onChange={handleChangeInputs} minLength="6" maxLength="15" required/>
+        name={'password'} onChange={handleChange} minLength="6" maxLength="15" required/>
         <span id={'login-password-error'}
-              className={`popup__error${inputValid.password ? '' : `_visible_register-error`}`}>
-          {inputValid.password ? '' : errorMessage.password}
+              className={`popup__error${isValid.password ? '' : `_visible_register-error`}`}>
+          {isValid.password ? '' : errors.password}
         </span>
         <button
-          className={`login-container__button ${inputValid.email && inputValid.password ? '' : `register-container__button_invalid`}`}
-          disabled={!inputValid.email && inputValid.password} type={'submit'}>Войти
+          className={`login-container__button ${isValid ? '' : `register-container__button_invalid`}`}
+          disabled={!isValid} type={'submit'}>Войти
         </button>
       </form>
     </div>

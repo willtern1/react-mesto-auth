@@ -3,7 +3,7 @@ class Api {
     this._url = config.url;
     this._headers = config.headers;
   }
-_responseCheck(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
@@ -17,7 +17,7 @@ getUserInfo() {
       {method: 'GET',
         headers: this._headers}
     ).then((res) => {
-      return this._responseCheck(res)
+      return this._checkResponse(res)
     })
 }
 //Добываем карточки из ссылки
@@ -27,7 +27,7 @@ getCardsInfo() {
       {method: 'GET',
         headers: this._headers}
     ).then((res) => {
-      return this._responseCheck(res)
+      return this._checkResponse(res)
     })
 }
 
@@ -42,7 +42,7 @@ pathUserData(data) {
           about: data.about
         })}
       ).then((res) => {
-        return this._responseCheck(res)
+        return this._checkResponse(res)
     })
 }
 
@@ -57,7 +57,7 @@ postCardData(data) {
         link: data.link
       })}
       ).then((res) => {
-        return this._responseCheck(res)
+        return this._checkResponse(res)
     })
 }
 
@@ -68,7 +68,7 @@ postCardData(data) {
       {method: 'DELETE',
       headers: this._headers,}
       ).then((res) => {
-        return this._responseCheck(res)
+        return this._checkResponse(res)
     })
 }
 // отправка лайк
@@ -78,7 +78,7 @@ putLikeCard(id) {
       {method: 'PUT',
       headers: this._headers}
     ).then((res) => {
-      return this._responseCheck(res)
+      return this._checkResponse(res)
     })
 }
 // удаление лайка
@@ -88,7 +88,7 @@ deleteLike(id) {
     {method: 'DELETE',
       headers: this._headers}
   ).then((res) => {
-    return this._responseCheck(res)
+    return this._checkResponse(res)
   })
 }
 
@@ -100,7 +100,7 @@ patchAvatar(data) {
       body: JSON.stringify({
         avatar: data.avatar,
       })}).then((res) => {
-        return this._responseCheck(res)
+        return this._checkResponse(res)
     })
 }
 }

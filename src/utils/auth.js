@@ -11,13 +11,7 @@ export const register = (email, password) => {
       email: email
     })
   })
-    .then((response) => {
-      return response.json();
-    })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => alert(err));
+    .then(checkRes)
 };
 
 
@@ -30,8 +24,7 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({email, password})
   })
-    .then((res => res.json()))
-    .catch(err => alert(err))
+    .then(checkRes)
 };
 
 export const checkToken = (jwt) => {
@@ -43,6 +36,12 @@ export const checkToken = (jwt) => {
       'Authorization': `Bearer ${jwt}`,
     }
   })
-    .then(res => res.json())
-    .then(data => data)
+    .then(checkRes)
+}
+
+function checkRes(res) {
+  if (res.ok) {
+    return res.json()
+  }
+  return Promise.reject(res.status)
 }
