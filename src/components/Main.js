@@ -32,6 +32,9 @@ function Main(props) {
             likes={card.likes.length}
             onCardLike={props.onCardLike}
             onCardDelete={props.onCardDelete}
+            openDeleteConfirmPopup={props.openDeleteConfirmPopup}
+            handleSelectedCard={props.handleSelectedCard}
+            handleDelCardSet={props.handleDelCardSet}
           />
         ))}
       </section>

@@ -13,10 +13,10 @@ function Card(props) {
     props.onCardLike(props.card);
   }
 
-  //Удаление карточки
-  function handleDeleteClick() {
-    props.onCardDelete(props.card);
+  function handleSetDeleteCard() {
+    props.handleDelCardSet(props.card)
   }
+
 //Проверка владельца карточки
   const isOwn = props.card.owner._id === user._id;
 // удаление кнопки, в зависимости от владельца и наоборот
@@ -32,7 +32,7 @@ function Card(props) {
 
   return (
     <article className="element">
-      <button className={cardDeleteButtonClassName} onClick={handleDeleteClick} type="button" aria-label="element__trash-button"/>
+      <button className={cardDeleteButtonClassName} onMouseEnter={handleSetDeleteCard} onClick={props.openDeleteConfirmPopup} type="button" aria-label="element__trash-button"/>
       <img className="element__image" src={props.link} alt={props.name} onClick={handleClick}/>
       <div className="element__description">
         <h2 className="element__text">{props.name}</h2>

@@ -16,6 +16,7 @@ import ProtectedRoute from "./ProtectRoute";
 import * as auth from "../utils/auth"
 import InfoTooltip from "./InfoTooltip";
 import Music from "./Music";
+import DeletePopupConf from "./DeletePopupConf";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);       //Хуки
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isRegisterPopup, setRegisterPopup] = React.useState(false)
+  const [isDeleteConfirmPopup, setIsDeleteConfirmPopup] = React.useState(false);
   const [registerPopupSubtitle, setRegisterPopupSubtitle] = React.useState('')
   const [infoToolTipTitle, setInfoToolTipTitle] = React.useState('')
   const [infoToolTipClass, setInfoToolTipClass] = React.useState(false)
@@ -36,7 +38,7 @@ function App() {
   const registerPath = '/sign-in' === pathname;
   const authorizationPath = '/sign-up' === pathname;
   const mainPath = '/' === pathname;
-
+  const [selectedDelCard, setSelectedDelCard] = React.useState({})
 
   //лайк
   function handleCardLike(card) {
@@ -92,8 +94,16 @@ function App() {
     setSelectedCard(card)
   }
 
+  function handleDelCardSet(card) {
+    setSelectedDelCard({card})
+  }
+
   function openRegisterPopup() {
     setRegisterPopup(true)
+  }
+
+  function openDeleteConfirmPopup() {
+    setIsDeleteConfirmPopup(true)
   }
 
 //функция закрытия попчанских
@@ -101,6 +111,7 @@ function App() {
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
+    setIsDeleteConfirmPopup(false)
     setRegisterPopup(false)
     setSelectedCard({name: '', link: ''})
   }
@@ -236,6 +247,12 @@ function App() {
             onClose={closeAllPopups}
           >
           </ImagePopup>
+          <DeletePopupConf
+            isOpen={isDeleteConfirmPopup}
+            onClose={closeAllPopups}
+            handleCardDelete={handleCardDelete}
+            selectedDelCard={selectedDelCard}
+          />
           <Header
             loggedIn={loggedIn}
             headerEmail={headerEmail}
@@ -251,7 +268,8 @@ function App() {
               cards={cards}
               currentUser={currentUser}
               onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
+              openDeleteConfirmPopup={openDeleteConfirmPopup}
+              handleDelCardSet={handleDelCardSet}
               component={Main}
             />}/>
             <Route path={'*'} element={<ProtectedRoute/>}/>
